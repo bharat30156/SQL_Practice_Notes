@@ -53,15 +53,35 @@ select [temporaray_table_name].[column_name], [][] from [table_name][temporaray_
 -- Select stament and restrictions on table using specific functions to get the data
 -- WHERE, AND, OR, NOT
 Select [column_name],[column_name] from [table_name] where [column_name] = [value];
--- return values if both condition are true
+-- return values if both condition are true  // we can use and 3 times
 Select [column_name],[column_name] from [table_name] where [column_name] = [value] AND [column_name] = [value];
--- return all value if any of the conditions true
+-- return all value if any of the conditions true // same 3 times
 Select [column_name],[column_name] from [table_name] where [column_name] = [value] OR [column_name] = [value];
--- return all values excet the condition which should not be ture
+-- return all values excet the condition which should not be ture // same 3 times
 Select [column_name],[column_name] from [table_name] where NOT [column_name] = [value];
 
+--Orderby, Limit, Offset
+--orderby
+Select [column_name], [column_name] FROM [table_name] ORDER BY [column_name] asc/desc,[column_name] asc/desc;
 
+--limit
+Select [column_name],[column_name] FROM [table_name] Limit [any_number];
 
+--offset // means how many row I want to leave // Limit how many rows I want
+select [column_name], [column_name] from [table_name] LIMIT [any_number] offset [any_number];
+
+--Aggregate functions
+--AVG,SUM,COUNT
+
+--count
+Select COUNT([column_name]) from table_name where [column_name] = [value];
+
+--Sum
+Select SUM([column_name]) from table_name where [column_name] = [value];
+
+--Average
+Select AVERAGE([column_name]) from table_name where [column_name] = [value];
+                                                                                                                                                                     
 
 
 
