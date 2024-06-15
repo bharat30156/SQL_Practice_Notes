@@ -81,7 +81,85 @@ Select SUM([column_name]) from table_name where [column_name] = [value];
 
 --Average
 Select AVERAGE([column_name]) from table_name where [column_name] = [value];
-                                                                                                                                                                     
+
+--String Functions in SQL 
+-- we can create string using 2 ways with single '' quotation and double " " quotation
+-- Length function / helps to get the length of the String
+Select LENGTH([value]);
+Select LENGTH([column_name]) FROM table_name where [column_name] = [value];
+-- Also we can use alias as well.
+Select LENGTH([column_name]) FROM table_name [other_condition like limit, offset];
+
+-- Concat function / combine two strings
+Select CONCAT([value], [value]);
+Select CONCAT([column_name], [column_name]) FROM table_name where [column_name] = [value];
+-- Also we can use alias as well.
+Select CONCAT([column_name], [column_name]) FROM table_name [other_condition like limit, offset];
+
+-- LCASE to make the string in lower case
+Select LCASE([value]);
+Select LCASE([column_name]) FROM table_name where [column_name] = [value];
+-- Also we can use alias as well.
+Select LCASE([column_name]) FROM table_name [other_condition like limit, offset]; 
+
+--UCASE to make the string in upper case
+Select UCASE([value]);
+Select UCASE([column_name]) FROM table_name where [column_name] = [value];
+-- Also we can use alias as well.
+Select UCASE([column_name]) FROM table_name [other_condition like limit, offset]; 
+
+--SUBSTRING(str, length1, length2) index start from 1
+Select SUBSTRING([value], Length1, Length2);
+Select SUBSTRING([column_name], Length1, Length2) FROM table_name where [column_name] = [value];
+-- Also we can use alias as well.
+Select SUBSTRING([column_name], Length1, Length2) FROM table_name [other_condition like limit, offset]; 
+-- Bonus Question by me /get the any column last entry with string value, that column have 
+-- only last 2 letters in the caps
+select concat(substring(first_name, 1, LENGTH(first_name) - 2), UCASE(substring(first_name, -2))) as name from employee order by first_name desc limit 1 offset 2;
+
+
+-- Trim function / removes the spaces from the front and back of the string
+Select Trim("     Hello");
+Select Trim([column_name]) FROM table_name where [column_name] = [value];
+-- Also we can use alias as well.
+Select Trim([column_name]) FROM table_name [other_condition like limit, offset]; 
+
+-- Reverse Function / reverse the string
+Select Reverse("Hello");
+Select Reverse([column_name]) FROM table_name where [column_name] = [value];
+-- Also we can use alias as well.
+Select Reverse([column_name]) FROM table_name [other_condition like limit, offset]; 
+
+-- Compare 2 Strings
+Select STRCMP("Hello", "Hello");
+-- return values 
+-- if str1 = str2, this function return 0
+-- if str1 < str2, this function return -1
+-- if str1 > str2, this function return 1
+
+
+-- Other important functions
+
+-- CURDATE / get the current date -- format YYYY-MM--DD
+Select CURDATE(); 
+
+-- CURTIME / get the current time -- format HH:MM:SS
+Select CURTIME();
+
+-- NOW() get the current date with current time -- format YYYT-MM-DD HH:MM:SS
+Select NOW();
+
+-- We can get only current year as well or day, month
+Select YEAR(CURDATE());
+Select MONTH(CURDATE());
+Select DAY(CURDATE());
+
+-- We can get only current HH as well or MM, SS
+Select HOUR(CURTIME());
+Select Minute(CURTIME());
+Select SECOND(CURTIME());
+
+
 
 
 
