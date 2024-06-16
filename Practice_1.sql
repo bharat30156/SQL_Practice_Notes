@@ -149,17 +149,63 @@ Select CURTIME();
 -- NOW() get the current date with current time -- format YYYT-MM-DD HH:MM:SS
 Select NOW();
 
--- We can get only current year as well or day, month
+-- We can get only current year as well or day, month, I can own date as well " "
 Select YEAR(CURDATE());
 Select MONTH(CURDATE());
 Select DAY(CURDATE());
 
--- We can get only current HH as well or MM, SS
+-- We can get only current HH as well or MM, SS // I can pass own time as in " "
 Select HOUR(CURTIME());
 Select Minute(CURTIME());
 Select SECOND(CURTIME());
 
+-- if is condition we need to use ,
+Select if(4<5, "YES","NO");
+Select if([column_name], "YES", "NO") FROM table_name where [column_name] = [value];
+-- Also we can use alias as well.
+Select If([column_name], "YES", "NO") FROM table_name [other_condition like limit, offset]; 
 
+
+-- IFNULL return the first value if it is not null otherwise return the second value
+Select IFNULL(NULL, "HELLO");
+-- anoher case
+Select IFNULL("BHARAT", "Hello"); -- It will return Bharat  
+
+-- DATABASE() / Return the current database
+Select DATABASE();
+-- VERSION() / Return the version of my sql server 
+Select VERSION();
+-- USER / return the user of the mysql
+Select USER();
+
+-- Math Function need to add by me https://www.w3schools.com/sql/sql_ref_sqlserver.asp
+
+
+-- IN Operator / alternative of OR operator, to get multiple values to save the code line
+Select * from table_name where [column_name] IN ([values]);
+
+-- ** Like operator / can be use only with where
+-- when we want to search the patern
+-- eg name starting with letter a, ending with specific letter 
+-- it can be whole word as well 
+-- wildcards caharcter % -> Zero character, 1 character, more than onechar
+-- _  -> only represent 1 charcter
+
+Select * from [table_name] where [column_name] like "a%";
+-- to see the if value is ending with specific letter
+Select * from [table_name] where [column_name] like "%d";
+
+-- _ we can use this if we want to the data after 2,3... more character
+Select * from [table_name] where [column_name] like '__a%';
+Select * from [table_name] where [column_name] like '_a%';
+
+-- if we do not know what is in the front and at the back 
+-- then we can use percentage at both side
+select * from [table_name] where [column_name] like '%abc%';
+
+
+-- Connecting the tables and performing joins
+-- primary key -> unique & can not be null/ we can use more operation as well like AUTO_INCREMENT, DEFAULT, UNIQUE
 
 
 
