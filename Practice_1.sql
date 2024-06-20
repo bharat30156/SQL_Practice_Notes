@@ -16,6 +16,8 @@ CREATE Table students_2(Id int(9)primary key, Name varchar(50)not null, Roll_No 
 DROP Table [table_name];
 -- To describe/see the table columns informtaion
 DESC [table_name];
+-- To get the table columns describes and see the constratints 
+Show Create table [table_name]
 -- To update the table structure // "add" more columns or "Drop" delete columns 
 ALTER table [table_name] add phone int(9)not null;
 ALTER table [table_name] drop Column [column_name];
@@ -206,8 +208,60 @@ select * from [table_name] where [column_name] like '%abc%';
 
 -- Connecting the tables and performing joins
 -- primary key -> unique & can not be null/ we can use more operation as well like AUTO_INCREMENT, DEFAULT, UNIQUE
+-- Foregin Key this is key which is present in the main table and one column of this table 
+-- will be present in another table as well
 
+-- Cascading -- if anything delete from the parent table then 
+-- it will delete the data related to that in child table
+-- also we can use other properties as well which include "Nothing"
 
+-- Also Foreign key ingnore all the work which will try to break the link
+-- between the tables;
+
+-- syntax foregin key creation
+-- while creating the table we can add foregin key 
+CREATE TABLE [table_name] ([column_name] [datatype]([size])[extra], .., 
+[Foregin_column_name], Foreign KEY[(Foreign_column_name)] REFRENCES [parent_table_name][(parent_table_primary_key)]);
+
+-- Foregin Key is constraints / we can add constraints later on and remove it as well
+-- by adding column to the child table using alter command and then we can make column
+-- as foregin key
+
+-- add / Constraints are the set of rules or condition that are applied 
+-- to the data to maintain its integrity, reliability & accuracy
+ALTER table [table_name] ADD FOREIGN KEY [(column_name)] REFERENCES [parent_table_name][(parent_table_primary_key)];
+-- another way
+ALTER table [table_name] ADD constraints [column_name] FOREIGN KEY (column_name) REFERENCES [parent_table_name][(parent_table_primary_key)];
+
+-- Dropping the foregin key
+-- first we need to get the constratints of foreging key if we have assigned the CONSTRAINT
+show create table [table_name];
+
+-- once we get the constraint
+alter table [table_name] drop FOREIGN KEY [constraint_name];
+
+-- joins // whenever we do require to fetch the data from multiple tables together
+-- then we use joins concept
+
+-- simple join, equi join 
+-- column name from diffrent table for 2 tables
+Select e.[column_name], f.[column_name] from table_name1 e, table_name2 f where e.[column_name] = f.[column_name];  
+-- for 3 tables equi join
+Select e.[column_name], f.[column_name], g.[column_name] from table_name1 e, table_name2 f, table_name3 g where e.[column_name] = f.[column_name] AND e.[column_name] = g.[column_name];
+
+-- Now implementing the iner join 
+Select
+e.[column_name],
+e.[column_name],
+f.[column_name],
+g.[column_name]
+FROM
+table_name1 e
+INNER JOIN 
+table_name2 f ON e.[column_name] = f.[column_name]
+INNER JOIN
+table_name3 g ON e.[column_name] = g.[column_name]
+EXTRA conditions using where; 
 
 
 
