@@ -263,6 +263,96 @@ INNER JOIN
 table_name3 g ON e.[column_name] = g.[column_name]
 EXTRA conditions using where; 
 
+-- Left join means 
+--> It contain innner join + it will give all infomation of left table 
+--> even though if the matching column condition do not meet
+Select
+e.[column_name],
+e.[column_name],
+f.[column_name],
+g.[column_name]
+FROM
+table_name1 e
+LEFT JOIN 
+table_name2 f ON e.[column_name] = f.[column_name]
+EXTRA conditions using where; 
+
+-- Same concept for right join 
+Select
+e.[column_name],
+e.[column_name],
+f.[column_name],
+g.[column_name]
+FROM
+table_name1 e
+Right JOIN 
+table_name2 f ON e.[column_name] = f.[column_name]
+EXTRA conditions using where; 
+
+--Need the first_name, last_name of all employee 
+--However I do require the all the information of laptop hold by employee
+--& qualification hold by employee 
+-- Practice
+select 
+e.first_name, e.last_name, l.model, q.q_name
+from employee e
+LEFT JOIN
+employee_laptop l ON e.id = l.emp_id
+LEFT JOIN
+employee_qualification q ON e.id = q.emp_id;
+
+-- full outer join, 
+-- this join consist of Inner Join + Left Join + Right Join 
+-- this join will return all the information which match the join condition + all the rest information 
+-- which left table consist of + all the information which right table consist of 
+-- this join is not possible in MY SQL 
+-- However we can use this join in postgree sql 
+-- we can use union to join 2 diffrent joins together below is EG
+SELECT 
+    e.first_name, 
+    e.last_name, 
+    l.laptop_name, 
+    l.model
+FROM 
+    employee e
+LEFT JOIN 
+    employee_laptop l 
+ON 
+    e.id = l.emp_id
+UNION
+SELECT 
+    e.first_name, 
+    e.last_name, 
+    l.laptop_name, 
+    l.model
+FROM 
+    employee e
+RIGHT JOIN 
+    employee_laptop l 
+ON 
+    e.id = l.emp_id;
+
+-- Cross Join/ it is the cartesian product of the table. 
+-- if we applies this join then we will get output table1 rows X table2 rows
+-- we do not need to define the join condition while using this join 
+
+SELECT e.first_name, e.last_name, l.laptop_name, l.model
+from employee e
+CROSS JOIN 
+employee_laptop l;
+
+-- Natural Join 
+-- This join work same as the INNER JOIN if there is column that is present 
+-- in the table1 have same as the column in table2 
+-- Otherwise this join work as the Cross join if there is no column present in the table 
+-- that have the same same 
+-- Also we do not require any join condition to perform this join 
+SELECT e.first_name, e.last_name, l.laptop_name, l.model
+from employee e
+NATURAL JOin
+employee_laptop l;
+
+
 
 
 
