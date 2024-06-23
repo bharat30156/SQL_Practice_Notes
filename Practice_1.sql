@@ -84,6 +84,38 @@ Select SUM([column_name]) from table_name where [column_name] = [value];
 --Average
 Select AVERAGE([column_name]) from table_name where [column_name] = [value];
 
+
+
+-- Group By and having 
+-- having can only be used with group to provide the condition 
+-- with simple select we only use the where clause 
+-- Group by is used to count the number of repetitve values in a particular column 
+-- we can perform many operation on thi like sum, average etc 
+
+-- sample Table
+
+SaleID	ProductID	Quantity	Price	SaleDate
+1	    101	        5	        10.00	2024-06-01
+2	    102	        3	        15.00	2024-06-01
+3	    101	        2	        10.00	2024-06-02
+4	    103	        1	        20.00	2024-06-03
+5	    102	        7	        15.00	2024-06-03
+--We want to find the total quantity sold and the total sales amount for each product, 
+--but only for products that have sold more than 5 units in total.
+--using GROUP BY and HAVING:
+
+SELECT ProductID, 
+       SUM(Quantity) AS TotalQuantity, 
+       SUM(Quantity * Price) AS TotalSales
+FROM Sales
+GROUP BY ProductID
+HAVING SUM(Quantity) > 5;
+
+-- Answer 
+
+ProductID	TotalQuantity	TotalSales
+102	        10	            150.00
+
 --String Functions in SQL 
 -- we can create string using 2 ways with single '' quotation and double " " quotation
 -- Length function / helps to get the length of the String
@@ -352,11 +384,60 @@ from employee e
 NATURAL JOin
 employee_laptop l;
 
+-- Self join 
 
 
 
 
 
 
+
+
+
+
+-- Data Import and export through My SQL work bench 
+-- We can import the data in excel file as well / data which come as query result
+-- We can user in the my sql and provide different access to that user.
+
+
+
+-- further more in My SQL 
+-- Store procedure
+
+-- we can exceute multiple queries at a single time instead of excetuing them one by one 
+-- we can create the batch of querries which will be known as store proceduce in which we can save 
+--mutiple querries, and that store procedure will be save on the sql server directly ]
+
+-- we can create variable, if else, loops and pass the parameter inside the stroe procedure 
+-- we can not return any values when we pass the parameters 
+
+-- Advantage of this 
+-- it is use to reduce the traffic 
+-- centralized the bussiness logic / only sql developer can write the querries and other developer can directly use the store procedure only
+-- database become more secure 
+-- we can manage user and provvide them specific access
+
+
+-- we can change the delimiter in SQL 
+-- Delimiter is the symbol from which the querry ends 
+Delimiter  //
+
+
+-- way to create the store procedure 
+-- Now I am creating store procedure to create the table and then inserting two students below is the full syntax 
+-- Values inside [] are dynamic. 
+
+create procedure [createUserTable()]
+    -> begin
+    -> create table if not exists [students](
+    -> [students_id] int primary key auto_increment, 
+    -> [first_name] varchar(20) not null,
+    -> [last_name] varchar(20) not null,
+    -> [city] varchar(15) not null
+    -> );
+    -> insert into students (first_name, last_name, city) values ("Jennifer", "Dalal", "London");
+    -> insert into students (first_name, last_name, city) values ("Ola", "Lola", "Africa");
+    -> select * from students;
+    -> end//
 
 
