@@ -423,7 +423,7 @@ employee_laptop l;
 Delimiter  //
 
 
--- way to create the store procedure 
+-- way to create the store procedure / we can use the if not exists while creating store procedure as well
 -- Now I am creating store procedure to create the table and then inserting two students below is the full syntax 
 -- Values inside [] are dynamic. 
 
@@ -440,4 +440,14 @@ create procedure [createUserTable()]
     -> select * from students;
     -> end//
 
+-- to run the store procedure 
+-- use the below syntax 
+call createUserTable();
+
+
+-- variable declaring syntax 
+Declare [variable_name] DATATYPE(size) [default_value];
+
+--initializing variable 
+set [variable_name] = [value];
 
