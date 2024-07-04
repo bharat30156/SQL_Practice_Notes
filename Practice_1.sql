@@ -451,3 +451,33 @@ Declare [variable_name] DATATYPE(size) [default_value];
 --initializing variable 
 set [variable_name] = [value];
 
+-- using store procedure for the count the users
+create procedure count_user()
+    -> begin
+    -> declare user_count int default 0;
+    -> select count(students_id) into user_count from students;
+    -> select user_count;
+    -> end//
+
+
+-- Parameters
+-- IN By Default // Accept the value or to get the value from the user
+-- OUT we need to create this parameter  // 
+-- IN OUT
+
+-- for IN 
+
+create procedure [procedure_name] (In [parameter_name] [datatype]([size]))
+begin
+Select * from [table_name] Where [column_name] = [parameter_name];
+end// 
+
+-- Example 
+create procedure select_by_last(IN l_name varchar(30))
+    -> begin
+    -> select * from students where last_name = l_name;
+    -> end//
+
+
+
+
