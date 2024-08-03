@@ -263,7 +263,7 @@ CREATE TABLE [table_name] ([column_name] [datatype]([size])[extra], ..,
 -- to the data to maintain its integrity, reliability & accuracy
 ALTER table [table_name] ADD FOREIGN KEY [(column_name)] REFERENCES [parent_table_name][(parent_table_primary_key)];
 -- another way
-ALTER table [table_name] ADD constraints [column_name] FOREIGN KEY (column_name) REFERENCES [parent_table_name][(parent_table_primary_key)];
+ALTER table [table_name] ADD constraints [column_nlame] FOREIGN KEY (column_name) REFERENCES [parent_table_name][(parent_table_primary_key)];
 
 -- Dropping the foregin key
 -- first we need to get the constratints of foreging key if we have assigned the CONSTRAINT
@@ -277,10 +277,13 @@ alter table [table_name] drop FOREIGN KEY [constraint_name];
 
 -- simple join, equi join 
 -- column name from diffrent table for 2 tables
+-- NON Ansi Way of writing the query / MY SQL, Postgre SQL, MS SQL do not support the outer join in non ansi style
+-- We can use the non ansci style in the oracle DB
 Select e.[column_name], f.[column_name] from table_name1 e, table_name2 f where e.[column_name] = f.[column_name];  
 -- for 3 tables equi join
 Select e.[column_name], f.[column_name], g.[column_name] from table_name1 e, table_name2 f, table_name3 g where e.[column_name] = f.[column_name] AND e.[column_name] = g.[column_name];
 
+--Implementing through the ansci style. 
 -- Now implementing the iner join 
 Select
 e.[column_name],
@@ -385,14 +388,15 @@ NATURAL JOin
 employee_laptop l;
 
 -- Self join 
-
-
-
-
-
-
-
-
+-- This join is used when we compare the table itself
+-- sample table consists of column id, person_name, person_age, parent_id
+ select child.person_name as child_name,
+ child.person_age as child_age,
+ parent.person_name as parent_name,
+ parent.person_age as parent_age
+ from family as child 
+ join family as parent
+ on child.parent_id = parent.id;
 
 
 -- Data Import and export through My SQL work bench 
@@ -477,6 +481,8 @@ create procedure select_by_last(IN l_name varchar(30))
     -> begin
     -> select * from students where last_name = l_name;
     -> end//
+
+    
 
 
 
