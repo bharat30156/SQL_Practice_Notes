@@ -482,8 +482,57 @@ create procedure select_by_last(IN l_name varchar(30))
     -> select * from students where last_name = l_name;
     -> end//
 
-    
+
+-- Subquerry in My SQL 
+-- How Sql process querry satement 
+-- different types of subquery 
+-- clauses where subquery is allowed 
+-- SQL commands where subquery is allowed.
 
 
+-- Subquery
+-- write a query to find the employee who's salary is more than average salary earned by all employees
+-- 1st part is to find the average salary 
+-- filter out the data employee table based on the average salary 
+-- In this instance SQL is working engine know that is subquery and that subquery is working own its own 
+-- so SQL engine first run that querry and hold the result and then run the outer query and then filter 
+-- out the result. 
+
+select avg(salary) from employee;  -- Normal query 
+select * -- outer query
+from employee 
+where salary > (select avg(salary) from employee); -- subquery inner query / scalary subquery 
+
+
+-- Different types of subquery in SQL 
+-- Scalar Subquery
+-- multiple row subquery 
+-- correlated subquery 
+
+
+-- scalar subquery 
+-- return only 1 row and 1 columns example while using the aggregate function 
+-- SQL is trating the subquery as a table itself 
+select * -- outer query
+from employee e 
+join (select avg(salary) as sal from employee) as avg_sal
+on e.salary > avg_sal.sal; 
+
+-- Mutiple row subquery (2 Types below mentioned)
+-- subquery return mutiple rows & mutiple columns 
+-- subquery return 1 column and mutiple rows 
+
+-- find the employee who earn higest salary in each department
+
+select dept_id, max(salary)
+from employee
+group by dept_id;
+
+
+select * 
+from employee
+where (first_name, salary) in (select dept_id, max(salary)
+from employee
+group by dept_id);
 
 
